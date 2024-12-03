@@ -24,6 +24,19 @@ def safe_count(report_list):
     return sum(safe_list)
 
 
+def safe_with_dampener_count(report_list):
+    safe_counter = 0
+    for report in report_list:
+        safe = False
+        if not is_safe(report):
+            for i in range(len(report)):
+                if is_safe(report[:i] + report[i+1:]):
+                    safe = True
+        else: safe = True
+        if safe:
+            safe_counter += 1
+    return safe_counter
+
 # def safe_count(report_list):
 #     safe_counter = 0
 #     for report in report_list:
@@ -94,13 +107,13 @@ def safe_count(report_list):
 
 report_list = input_to_lists("input.txt")
 print(safe_count(report_list))
-#print(safe_with_dampener_count(report_list))
+print(safe_with_dampener_count(report_list))
 
 #test_list = [[3, 4, 2, 5, 6]]
 #test_list = [[3, 4, 5, 6]]
 #test_list = [[3, 2, 4, 5, 6]]
 # test_list = [[3, 4, 5, 6, 6]]
-test_list = [[7, 6, 4, 2, 1], [1, 2, 7, 8, 9], [9, 7, 6, 2, 1], [1, 3, 2, 4, 5], [8, 6, 4, 4, 1], [1, 3, 6, 7, 9]]
+#test_list = [[7, 6, 4, 2, 1], [1, 2, 7, 8, 9], [9, 7, 6, 2, 1], [1, 3, 2, 4, 5], [8, 6, 4, 4, 1], [1, 3, 6, 7, 9]]
 #test_list = [[1, 2, 7, 8, 9]]
 # print(test_list[0][3])
 # print(len(test_list[0]))
