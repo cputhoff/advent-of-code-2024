@@ -23,18 +23,19 @@ def safe_count(report_list):
     safe_list = list(map(is_safe, report_list))
     return sum(safe_list)
 
+def safe_with_dampener(list):
+    if is_safe(list):
+        return True
+    
+    for i in range(len(list)):
+        if is_safe(list[:i] + list[i+1:]):
+            return True
+        
+    return False
+
 def safe_with_dampener_count(report_list):
-    safe_counter = 0
-    for report in report_list:
-        safe = False
-        if not is_safe(report):
-            for i in range(len(report)):
-                if is_safe(report[:i] + report[i+1:]):
-                    safe = True
-        else: safe = True
-        if safe:
-            safe_counter += 1
-    return safe_counter
+    safe_list = list(map(safe_with_dampener, report_list))
+    return sum(safe_list)
 
 
 report_list = input_to_lists("input.txt")
