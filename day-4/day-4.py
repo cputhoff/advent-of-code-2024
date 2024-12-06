@@ -52,7 +52,9 @@ def generate_x_mas_searches(num_col, content):
 
     for i in range(len(content)):
         if ((i % num_col) <= (num_col - word_len)) and (i < vert_search_end):
-            x_mas_searches.append(content[i:i + bwd_diag_search_offset_end:bwd_diag_step] + content[i + fwd_diag_search_offset_start:i + fwd_diag_search_offset_end:fwd_diag_step])
+            bwd_search = content[i:i + bwd_diag_search_offset_end:bwd_diag_step]
+            fwd_search = content[i + fwd_diag_search_offset_start:i + fwd_diag_search_offset_end:fwd_diag_step]
+            x_mas_searches.append(bwd_search + fwd_search)
     
     return x_mas_searches
 
